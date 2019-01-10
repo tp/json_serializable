@@ -96,6 +96,8 @@ class JsonKey {
   /// same field, an exception will be thrown during code generation.
   final bool disallowNullValue;
 
+  final bool parentProvided;
+
   /// Creates a new [JsonKey] instance.
   ///
   /// Only required when the default behavior is not desired.
@@ -109,5 +111,6 @@ class JsonKey {
     this.defaultValue,
     this.required,
     this.disallowNullValue,
+    this.parentProvided,
   });
 }

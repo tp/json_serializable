@@ -2,9 +2,9 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+import 'package:analyzer/dart/constant/value.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
-import 'package:analyzer/dart/constant/value.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -113,6 +113,7 @@ JsonKey _from(FieldElement element, JsonSerializable classAnnotation) {
     defaultValue: defaultValueLiteral,
     required: obj.getField('required').toBoolValue(),
     disallowNullValue: disallowNullValue,
+    parentProvided: obj.getField('parentProvided').toBoolValue(),
   );
 }
 
@@ -126,16 +127,19 @@ JsonKey _populateJsonKey(
   Object defaultValue,
   bool required,
   bool disallowNullValue,
+  bool parentProvided,
 }) {
   final jsonKey = JsonKey(
-      name: _encodedFieldName(classAnnotation, name, fieldElement),
-      nullable: nullable ?? classAnnotation.nullable,
-      includeIfNull: _includeIfNull(
-          includeIfNull, disallowNullValue, classAnnotation.includeIfNull),
-      ignore: ignore ?? false,
-      defaultValue: defaultValue,
-      required: required ?? false,
-      disallowNullValue: disallowNullValue ?? false);
+    name: _encodedFieldName(classAnnotation, name, fieldElement),
+    nullable: nullable ?? classAnnotation.nullable,
+    includeIfNull: _includeIfNull(
+        includeIfNull, disallowNullValue, classAnnotation.includeIfNull),
+    ignore: ignore ?? false,
+    defaultValue: defaultValue,
+    required: required ?? false,
+    disallowNullValue: disallowNullValue ?? false,
+    parentProvided: parentProvided ?? false,
+  );
 
   return jsonKey;
 }
