@@ -5,6 +5,9 @@
 import 'allowed_keys_helpers.dart';
 import 'json_serializable.dart';
 
+/// Sentinel value denoting that no explicit `unknownEnumValue` was set via [JsonKey]
+const noExplicitUnknownEnumValueSetSentinel = Object();
+
 /// An annotation used to specify how a field is serialized.
 class JsonKey {
   /// The value to use if the source JSON does not contain this key or if the
@@ -116,6 +119,6 @@ class JsonKey {
     this.nullable,
     this.required,
     this.toJson,
-    this.unknownEnumValue,
+    this.unknownEnumValue = noExplicitUnknownEnumValueSetSentinel,
   });
 }

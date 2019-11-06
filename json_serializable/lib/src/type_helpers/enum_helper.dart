@@ -98,7 +98,7 @@ T _$enumDecode<T>(
       .singleWhere((e) => e.value == source, orElse: () => null)
       ?.key;
 
-  if (value == null && unknownValue == null) {
+  if (value == null && unknownValue == noExplicitUnknownEnumValueSetSentinel) {
     throw ArgumentError('`$source` is not one of the supported values: '
         '${enumValues.values.join(', ')}');
   }
